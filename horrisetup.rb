@@ -18,7 +18,7 @@ database = SQLite3::Database.new("animi.db")
 
 database.execute("CREATE TABLE animidb(id integer primary key, animo text, episodio integer, risoluzione text);")
 
-puts "Database creato!!"
+puts "Database ready!!"
 puts ""
 
 print "Transmission username: "
@@ -33,4 +33,5 @@ config = {"transmission" => {"username" => "#{usr}", "password" => "#{psw}", "ho
 f = File.new("config.yml", "w")
 f.write(config.to_yaml)
 
-puts "File di configurazione creato!!"
+puts "Config file ready!!"
+puts "Manage your animus via horridb.rb!!"
