@@ -88,7 +88,7 @@ def menu(db)
     puts "- Options -"
     puts ""
     puts "1) List all animus"
-    puts "2) Add an animus"
+    puts "2) Add an animu"
     puts "3) Edit an animus"
     puts "4) Remove an animus"
     puts ""

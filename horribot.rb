@@ -12,14 +12,15 @@ require 'yaml'
 # configurazione
 # ------------------
 
+folder = "/home/pi/horridl/"
 
-if (!File.exist?("animi.db") || !File.exist?("config.yml"))
+if (!File.exist?("#{folder}animi.db") || !File.exist?("#{folder}config.yml"))
     puts "DB and/or config file missing!!"
     puts "Run horrisetup.rb first!!"
     exit(0)
 end
 
-config = YAML.load(File.open("config.yml","r"))
+config = YAML.load(File.open("#{folder}config.yml","r"))
 
 transmission_username = config["transmission"]["username"]
 transmission_password = config["transmission"]["password"]
@@ -31,7 +32,7 @@ transmission_host = config["transmission"]["host"]
 LINK_SEARCH = "http://horriblesubs.info/lib/search.php?value="
 DATABASE = config["database"]
 
-DB = SQLite3::Database.open(DATABASE)
+DB = SQLite3::Database.open(folder + DATABASE)
 
 ANIMO_NOME_DB = DB.execute "SELECT animo FROM animidb"
 ANIMO_NOME = ANIMO_NOME_DB.flatten
