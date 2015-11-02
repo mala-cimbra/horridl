@@ -46,11 +46,17 @@ ANIMO_NOME.each do |animo|
     
     pagina = Nokogiri::HTML(open(LINK_SEARCH + animo.split.join("%20")))
     
+    # new hs layout
+    # ("div")[0] = 480p
+    # ("div")[1] = 720p
+    # ("div")[2] = 1080p
+
     episodio_hs = pagina.css("body").css("div")[0]["id"].split("-").last.to_i
     
     if episodio < episodio_hs
-	link = pagina.css("body").css("div")[0].css("div.resolution-block").css("span#" + risoluzione).css("a")[0]["href"]
-	system("transmission-remote #{transmission_host}:9091 --auth #{transmission_username}:#{transmission_password} --add \"#{link}\"")
+	#link = pagina.css("body").css("div")[0].css("div.resolution-block").css("span#" + risoluzione).css("a")[0]["href"]
+	link = pagina.css("body").css("div")[0].child.child.children[1].child.child["href"]
+    system("transmission-remote #{transmission_host}:9091 --auth #{transmission_username}:#{transmission_password} --add \"#{link}\"")
 	DB.execute "UPDATE animidb SET episodio=#{episodio_hs} WHERE animo like \"#{animo}\""
     end
 end
